@@ -16,7 +16,7 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `allquests`
+-- Table structure for table `recipes`
 --
 CREATE DATABASE it610project;
 USE it610project;
@@ -79,7 +79,7 @@ CREATE TABLE `recipes` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `testmeals`
+-- Dumping data for table `recipes`
 --
 
 LOCK TABLES `recipes` WRITE;
