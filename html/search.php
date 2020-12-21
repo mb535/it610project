@@ -1,9 +1,11 @@
 <?php
-session_start();
 include("db_connect.php");
 include("db_functions.php");
-    global $db;
-    $query ='SELECT * FROM recipes';
+$_search = $_POST["Search"];
+//echo $_search;
+global $db;
+    $query ="SELECT * FROM recipes WHERE mealMeal LIKE '%".$_search."%' OR mealCategory LIKE '%".$_search."%' OR mealArea LIKE '%".$_search."%'";
+    //$query ='SELECT * FROM recipes';
     $statement = $db->prepare($query);
     $statement->execute();
     $recipes = $statement->fetchAll();
