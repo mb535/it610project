@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("db_connect.php");
 include("db_functions.php");
 $_search = $_POST["Search"];
@@ -67,13 +68,18 @@ global $db;
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($recipes as $quest) : ?>
+        <?php foreach ($recipes as $recipe) : ?>
         <tr>
-	  <td><img src="<?php echo $quest['mealMealThumb']; ?>" width="175" height="200"></td>	
-          <td><?php echo $quest['mealMeal']; ?></td>
-          <td><?php echo $quest['mealCategory']; ?></td>
-	  <td><?php echo $quest['mealArea']; ?></td>
-	  
+	  <td><img src="<?php echo $recipe['mealMealThumb']; ?>" width="175" height="200"></td>	
+          <td><?php echo $recipe['mealMeal']; ?></td>
+          <td><?php echo $recipe['mealCategory']; ?></td>
+	  <td><?php echo $recipe['mealArea']; ?></td>
+	  <td><form action="index.php" method="post">
+		<input type="hidden" name="action" value="get_instructions">
+                      <input type="hidden" name="id" value="<?php echo $recipe['idMeal']; ?>">
+                      <input type="submit" value="instructions">
+	      </form> 	
+	  </td>
 	  
           
   

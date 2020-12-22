@@ -1,17 +1,6 @@
 <?php
 session_start();
-include("db_connect.php");
-include("db_functions.php");
-    global $db;
-    $query ='SELECT * FROM recipes';
-    $statement = $db->prepare($query);
-    $statement->execute();
-    $recipes = $statement->fetchAll();
-
-
-
 ?>
-
 <html lang="en">
 
 <head>
@@ -49,49 +38,27 @@ include("db_functions.php");
 </nav>
 <head>
 
-<body>    
-    <h2>Recipes</h2>
-              
-        
-    <table class="table">
-      <thead>
-        <tr>
-	  <th scope="col">Image</th>
-          <th scope="col">Name</th>
-          <th scope="col">Category</th>
-          <th scope="col">Cuisine</th>
-          
-          
-        </tr>
-      </thead>
-      <tbody>
-        <?php foreach ($recipes as $recipe) : ?>
-        <tr>
-	  <td><img src="<?php echo $recipe['mealMealThumb']; ?>" width="175" height="200"></td>	
-          <td><?php echo $recipe['mealMeal']; ?></td>
-          <td><?php echo $recipe['mealCategory']; ?></td>
-	  <td><?php echo $recipe['mealArea']; ?></td>
-	  <td><form action="index.php" method="post">
-		<input type="hidden" name="action" value="get_instructions">
-                      <input type="hidden" name="id" value="<?php echo $recipe['idMeal']; ?>">
-                      <input type="submit" value="instructions">
-	      </form> 	
-	  </td>
-	  
-	  
-          
-  
-        </tr>
-        <?php endforeach; ?>
-      </tbody>
-    </table>
-    <form action="index.php" method="post">
-    
-    </form>
+<body>   
+<img src="<?php echo $_SESSION['image']; ?>" width="350" height="400"> 
+<?php
+
+include("db_connect.php");
+include("db_functions.php");
+//echo $_SESSION['instructions'];
+
+echo "<br><h1>Instructions: ". "</h1>";
+	$instructions = preg_split('/(?<=[.?!])\s+/' , $_SESSION['instructions'], -1 , PREG_SPLIT_NO_EMPTY);
+	//$x = "1" ;
+	foreach($instructions as $step){
+		//$step = ltrim($step, "STEP ".$x." -");
+		echo $step."<br>";
+		//$x++;
+		}
+?>
    
 
 
-    <h3><a href="index.html">Logout</a></h3>
+<h3><a href="index.html">Logout</a></h3>
 
 </body>
 </html>

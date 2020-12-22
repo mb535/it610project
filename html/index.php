@@ -21,7 +21,15 @@ if ($action == 'auth_login'){
 		  
     }
 }
-
+if($action== 'get_instructions'){
+	$idMeal = filter_input(INPUT_POST, 'id');
+	//echo $quest_id;
+	$instructions = getInstructions($idMeal);
+	foreach ($instructions as $instruct){
+		$_SESSION['instructions'] = $instruct['mealInstructions'];	
+		$_SESSION['image']=$instruct['mealMealThumb'];
+		header("Refresh:0; url=instructions.php");}
+}
     
 ?>
 
